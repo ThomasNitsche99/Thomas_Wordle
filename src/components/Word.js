@@ -1,16 +1,17 @@
-import React, {useState} from "react";
+import userEvent from "@testing-library/user-event";
+import React, {useEffect, useState,useRef} from "react";
 
 
 const Word = (props) =>{
 
     const disabled = props.disabled;
-    const [guessed, setGuessed] = useState("");
-    
     const [rowWord, setRowWord] = useState({id:props.id, word: {A:"", B:"", C:"", D:"", E:""}});
+    const colors = props.colors;
+    const startInput = useRef(null)
 
+    //handles change in the input field
     const handleChange = (e) =>{
         //check if number is input
-
         if (e.target.value == null || e.target.value == '')
         {
             if(props.id === rowWord["id"]){
@@ -44,12 +45,39 @@ const Word = (props) =>{
             }
         }
         setRowWord(rowWord);
-        console.log(rowWord);
+        props.gameStart(true)
+
+        if(e.target.nextSibling){
+            e.target.nextSibling.focus();
+        }
+
     }
 
+    const backSpace = (e) =>{
+        if(e.keyCode===8){
+            console.log(e.target);
+            if(e.target.value.name==="E"){
+                e.target.value="";
+                return
+            }
+            if(e.target.previousSibling && (!(e.target.value.name=="E"))){
+                e.target.previousSibling.focus();
+                e.target.value="";
+            }
+            else{
+                e.target.value="";
+            }
+        }
+
+    }
+
+    useEffect( () =>{
+        startInput.current.focus()
+    },[props.active])
+
+    //handle submitting of the entire row
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log("clicked");
         let word = "";
         for(var letter in rowWord["word"]){
             word += rowWord["word"][letter]
@@ -57,6 +85,7 @@ const Word = (props) =>{
 
         if(word.length< 5){
             return
+
         }else{
             props.setRowWords(props.rowWords.map(row => {
                 if(row.rowNr === rowWord.id){
@@ -67,18 +96,14 @@ const Word = (props) =>{
         }
     }
 
-    //todo, handle guess word
-    //check if word is correct, color the words at right position or wrong position
-
-
     return(
             <div className="">
                 <form onSubmit={handleSubmit} className="row">
-                    <input onChange={handleChange} type="text" className='input' maxLength="1" name="A" disabled={disabled? true: false} ></input>
-                    <input onChange={handleChange} type="text" className='input' maxLength="1" name="B" disabled={disabled? true: false}></input>
-                    <input onChange={handleChange} type="text" className='input' maxLength="1" name="C" disabled={disabled? true: false}></input>
-                    <input onChange={handleChange} type="text" className='input' maxLength="1" name="D" disabled={disabled? true: false}></input>
-                    <input onChange={handleChange} type="text" className='input' maxLength="1" name="E" disabled={disabled? true: false}></input>
+                    <input onChange={handleChange} type="text" className={colors[0]} maxLength="1" name="A" disabled={disabled? true: false} ref={startInput}></input>
+                    <input onChange={handleChange} type="text" className={colors[1]} maxLength="1" name="B" disabled={disabled? true: false} onKeyDown={backSpace}></input>
+                    <input onChange={handleChange} type="text" className={colors[2]} maxLength="1" name="C" disabled={disabled? true: false} onKeyDown={backSpace}></input>
+                    <input onChange={handleChange} type="text" className={colors[3]} maxLength="1" name="D" disabled={disabled? true: false} onKeyDown={backSpace}></input>
+                    <input onChange={handleChange} type="text" className={colors[4]} maxLength="1" name="E" disabled={disabled? true: false} onKeyDown={backSpace}></input>
                     <button className="btn" type="submit" disabled={disabled? true: false}>Guess</button>
                 </form>
             </div>

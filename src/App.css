@@ -1,30 +1,93 @@
 .App{
   max-width: 500px;
-  margin: auto;
-  margin-top: 10px;
+  margin: 1px auto;
+}
+
+.keyboard{
+  margin-top: 3px;
+  color: black;
+  font-size: 10px;
+  width: 500px;
+  height: 250px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.letter{
+  text-align: center;
+  margin: 5px;
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+}
+
+.letter_used{
+  text-align: center;
+  margin: 5px;
+  background-color: darkgray;
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+}
+
+.letter_in_word{
+  text-align: center;
+  margin: 5px;
+  background-color: #edd051;
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+}
+
+.letter_correct{
+  text-align: center;
+  margin: 5px;
+  background-color: green;
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
 }
 
 .header{
+  margin-top: 0;
   text-align: center;
-  font-size: 40px;
+  font-size: 35px;
   color: white;
-}
-.header p{
-  font-size: 20px;
-}
-
-
-.word{
-  width: 5px;
-  height: 50px;
+  text-decoration: underline;
 }
 
 .input{
+  border-radius: 10%;
   width: 70px;
   height: 70px;
   font-size: 70px;
   border: 1px solid gray;
   text-align: center;
+}
+
+
+.input_correctLetterSpot{
+  border-radius: 10%;
+  width: 70px;
+  height: 70px;
+  font-size: 70px;
+  border: 1px solid gray;
+  text-align: center;
+  background-color: green;
+  color: white;
+}
+
+.input_wrongLetterSpot{
+  border-radius: 10%;
+  width: 70px;
+  height: 70px;
+  font-size: 70px;
+  border: 1px solid gray;
+  text-align: center;
+  background-color: #edd051;
+  color: white;
 }
 
 .container{
@@ -34,6 +97,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  color: white;
   
 }
 
@@ -45,4 +109,12 @@
 
 .btn{
   background-color: lightgreen;
+  display: none;
 }
+
+.wonMessage{
+  color: black;
+  background-color: white;
+  text-align: center;
+}
+

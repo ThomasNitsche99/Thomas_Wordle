@@ -55,21 +55,14 @@ const Word = (props) =>{
 
     const backSpace = (e) =>{
         if(e.keyCode===8){
-            console.log(e.target);
-            if(e.target.value.name==="E"){
-                e.target.value="";
+            if(!(e.target.value=="")){
                 return
             }
-            if(e.target.previousSibling && (!(e.target.value.name=="E"))){
-                e.target.previousSibling.focus();
-                e.target.value="";
+            if(e.target.value=="" && e.target.previousSibling){
+                e.target.previousSibling.focus();   
             }
-            else{
-                e.target.value="";
-            }
-        }
-
     }
+}
 
     useEffect( () =>{
         startInput.current.focus()

@@ -4,6 +4,7 @@ import WordTable from './components/wordTable';
 import WonMessage from './components/wonMessage';
 import LostMessage from './components/lostMessage';
 import KeyBoard from './components/keyboard';
+import Info from './components/info';
 
 function App() {
 
@@ -70,6 +71,8 @@ function App() {
               letterCorrect={letterCorrect}
               tries={tries}
             />
+
+            <Info /> 
         </div>
   );
 }

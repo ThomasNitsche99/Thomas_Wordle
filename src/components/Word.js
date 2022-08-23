@@ -29,10 +29,16 @@ const Word = (props) =>{
             return;
         }
 
+
+
+        
+
         //if letter is not uppercase
         if(e.target.value !== e.target.value.toUpperCase()){
             e.target.value = e.target.value.toUpperCase();
         }
+
+
 
         const obj = e.target;
         const {name, value} = obj

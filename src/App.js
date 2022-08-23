@@ -8,6 +8,8 @@ import Info from './components/info';
 
 function App() {
 
+
+
   
 
   const [dailyWord, setDailyWord] = useState("");
